@@ -285,6 +285,225 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="monaq.github.io/2017/11/03/building_a_modern_media_experience/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Monica Kwon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Monaq Devlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/11/03/building_a_modern_media_experience/" class="post-title-link" itemprop="url">Building a Modern Media Experience (Chrome Dev Summit 2017) from Chrome Media Team</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-11-03 11:11:11" itemprop="dateCreated datePublished" datetime="2017-11-03T11:11:11+09:00">2017-11-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-06 15:18:26" itemprop="dateModified" datetime="2019-01-06T15:18:26+09:00">2019-01-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Chrome-dev-summit-2017"><a href="#Chrome-dev-summit-2017" class="headerlink" title="Chrome dev summit 2017"></a><a href="#Chrome-dev-summit-2017" title="Chrome dev summit 2017"></a>Chrome dev summit 2017</h1><h2 id="Building-a-Modern-Media-Experience-Chrome-Dev-Summit-2017-from-Chrome-Media-Team"><a href="#Building-a-Modern-Media-Experience-Chrome-Dev-Summit-2017-from-Chrome-Media-Team" class="headerlink" title="Building a Modern Media Experience (Chrome Dev Summit 2017) from Chrome Media Team"></a><a href="#Building-a-Modern-Media-Experience-Chrome-Dev-Summit-2017-from-Chrome-Media-Team" title="Building a Modern Media Experience (Chrome Dev Summit 2017) from Chrome Media Team"></a>Building a Modern Media Experience (Chrome Dev Summit 2017) from Chrome Media Team</h2><blockquote>
+<p>해당 포스트는 지난 chrome dev summit 2017 중 크롬브라우저에서의 미디어 재생에 관한 내용을 러프하게 옮긴 것입니다. 지적 참견 환영합니다</p>
+</blockquote>
+<p>원본 영상을 보시려면 아래 링크로</p>
+<h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a><a href="#Intro" title="Intro"></a>Intro</h3><p>미디어 전달의 중요성이 점차 높아지고 있음:</p>
+<ul>
+<li>Forbes, iHeartRadio, Geo Cinema 등의 사이트에서 동영상을 주요하게 활용중</li>
+<li>모바일 웹 미디어의 시청 시간 증가<br>: 지난 6개월간 크롬 안드로이드에서 사용자별 미디어 재생 시간이 2배 증가함</li>
+</ul>
+<h3 id="목차"><a href="#목차" class="headerlink" title="목차"></a><a href="#목차" title="목차"></a>목차</h3><ul>
+<li>미디어 관련 크롬 업데이트 사항</li>
+<li>조금 더 발전된 미디어 적용 사례</li>
+<li>PWA(<a href="http://terms.naver.com/entry.nhn?docId=3581225&amp;cid=59088&amp;categoryId=59096" target="_blank" rel="noopener">참고</a>) 활용 사례와 offline 미디어 재생사례 소개</li>
+</ul>
+<h4 id="1-크롬-업데이트-사항"><a href="#1-크롬-업데이트-사항" class="headerlink" title="1. 크롬 업데이트 사항"></a><a href="#1-크롬-업데이트-사항" title="1. 크롬 업데이트 사항"></a>1. 크롬 업데이트 사항</h4><ul>
+<li>오토플레이</li>
+</ul>
+<p>문제점 1. 오디오재생이 사용자의 의지와 상관없이 일어나는 것은 가장 많은 불만 사례이다.</p>
+<p>문제점 2. 데스크탑과 모바일간에 오토플레이 정책이 일관적이지 않음</p>
+<p>-&gt; 바뀐 정책:</p>
+<p>모든 플랫폼에서(iframe포함) 음소거된 미디어 자동재생만이 허용됨</p>
+<p>세 가지 경우만 빼고</p>
+<ul>
+<li>사용자 액션이 있을때: 미디어 탭 또는 클릭, 동영상 페이지로 이동</li>
+<li>데스크탑에서 사용자가 오디오를 많이 사용할 때</li>
+<li>모바일 환경에서 사이트가 홈화면에 추가되었을 때</li>
+</ul>
+<p>-promise로 사용자 환경에서의 음소거 자동재생 허용여부 확인 가능  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> promise = <span class="built_in">document</span>.querySelector(<span class="string">'video'</span>).play()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (promise !== <span class="literal">undefined</span>) &#123;</span><br><span class="line"></span><br><span class="line">    promise.then(\_ =&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 오토플레이 스타트</span></span><br><span class="line"></span><br><span class="line">    &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 오토플레이가 허용되지 않음</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// 풀래아버튼이 노출되고, 사용자가 클릭하면 재생</span></span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>-iframe 내부의 미디어 경우 앞으로 attribute를 통해 액세스 권한을 부여할 수 있음  </p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WRSEJCKu7zA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<p>-web btt 및 ttml의 렌더링을 사용자 정의할 수 있음</p>
+<p>-오프라인으로 보호되는 미디어재생이 허용</p>
+<h4 id="2-더-나은-미디어-적용-사례"><a href="#2-더-나은-미디어-적용-사례" class="headerlink" title="2. 더 나은 미디어 적용 사례"></a><a href="#2-더-나은-미디어-적용-사례" title="2. 더 나은 미디어 적용 사례"></a>2. 더 나은 미디어 적용 사례</h4><p>-2초간 버퍼링이 있을 때 초당 약 6%가 재생하지 않음</p>
+<ul>
+<li><p>preload를 통해 미디어 재생을 빨리 처리할 수 있음</p>
+</li>
+<li><p>preload를 auto로 하면 인앱 데이터가 캐싱되고 버퍼링 중지 없이 전체 재생이 가능..</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;video id=<span class="string">"video"</span> preload=<span class="string">"auto"</span> src=<span class="string">"file.mp4"</span> controls&gt;&lt;/video&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">     video.addEventListener(<span class="string">'loadedmetadata'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">var</span> bufferedSeconds = video.buffered.end(<span class="number">0</span>) - video.buffered.start(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.log(bufferedSeconds + <span class="string">' seconds of video are ready to play'</span>)</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>하지만 브라우저가 이를 무시할 수 있다(ex.데이터 세이버 사용)</p>
+<ul>
+<li>link preload는 페이지가 다운로드 중일 때 윈도우 로드를 직접 차단하지 않고 브라우저가 자원에 대한 요청을 하도록 하는 기능임.</li>
+</ul>
+<p>–link preload된 리소스는 브라우저에 로컬로 저장되며 DOM, javascript나 css 에서 사용될 때까지 비활성화됨</p>
+<ul>
+<li>MSC API를 활용한 예제</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;link rel=<span class="string">"preload"</span> <span class="keyword">as</span>=<span class="string">"fetch"</span> href=<span class="string">"https://cdn.com/file.webm"</span>&gt;</span><br><span class="line"></span><br><span class="line">&lt;video id=<span class="string">"video"</span> controls&gt;&lt;/video&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> mediaSource = <span class="keyword">new</span> MediaSource()</span><br><span class="line"></span><br><span class="line">    video.src = URL.createObjectURL(mediaSource)</span><br><span class="line"></span><br><span class="line">    mediaSource.addEventListener(<span class="string">'sourceopen'</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> sourceBuffer = mediaSource.addSourceBuffer(<span class="string">'video/webm; codecs=vp9'</span>)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> res = <span class="keyword">await</span> fetch(<span class="string">'https://cdn.com/file.webm'</span>)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> data = <span class="keyword">await</span> res.arrayBuffer()</span><br><span class="line"></span><br><span class="line">      sourceBuffer.appendBuffer(data)</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>-디바이스 메모리가 1기가 미만인 경우 사용자가 저성능 장치에 있다고 가정함(http 헤더 체크)<br>사용자가 데이터 요금을 지불해야 할 수 있음을 명심</p>
+<p>미디어 세션 api사용: 브라우저에서 이를 지원하는 경우 제목, 아티스트 같은 메타 데이터를 제공 가능</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 미디어가 재생될 때</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">'mediaSession'</span> <span class="keyword">in</span> navigator ) &#123;</span><br><span class="line"></span><br><span class="line">  navigator.mediaSession.metadata = <span class="keyword">new</span> MediaMetadata(&#123;</span><br><span class="line"></span><br><span class="line">    title: <span class="string">'Never Gonna Give You Up'</span>,</span><br><span class="line"></span><br><span class="line">    artist: <span class="string">'Rick Astley'</span>,</span><br><span class="line"></span><br><span class="line">    album: <span class="string">'Whenever You Need Somebody'</span>,</span><br><span class="line"></span><br><span class="line">    artwork: \[</span><br><span class="line"></span><br><span class="line">      &#123; <span class="attr">src</span>: <span class="string">'https://..'</span>, <span class="attr">sizes</span>: <span class="string">'256x256'</span>, <span class="attr">type</span>: <span class="string">'image/png'</span> &#125;,</span><br><span class="line"></span><br><span class="line">      &#123; <span class="attr">src</span>: <span class="string">'https://..'</span>, <span class="attr">sizes</span>: <span class="string">'256x256'</span>, <span class="attr">type</span>: <span class="string">'image/png'</span> &#125;</span><br><span class="line"></span><br><span class="line">    \]</span><br><span class="line"></span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>비디오가 보이지 않을 때 비디오 재생 멈추기  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 미디어가 재생될 때</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'visivilitychange'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">document</span>.visibilityState === <span class="string">'hidden'</span>) &#123;</span><br><span class="line"></span><br><span class="line">    video.pause()</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>디바이스가 가로 모드일 때 풀스크린으로 세팅하기  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">screen.orientation.addEventListener(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (screen.orientation.type.startWith(<span class="string">'landscape'</span>)) &#123;</span><br><span class="line"></span><br><span class="line">        video.requestFullscreen()</span><br><span class="line"></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">document</span>.fullscreenElement) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.exitFullscreen()</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<p>유용한 API들  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 미디어 액션 핸들러</span></span><br><span class="line"></span><br><span class="line">navigator.mediaSession.setActionHandler(<span class="string">'seekbackward'</span>, evt =&gt; &#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">navigator.mediaSession.setActionHandler(<span class="string">'seekforward'</span>, evt =&gt; &#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">navigator.mediaSession.setActionHandler(<span class="string">'play'</span>, evt =&gt; &#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">navigator.mediaSession.setActionHandler(<span class="string">'pause'</span>, evt =&gt; &#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">navigator.mediaSession.setActionHandler(<span class="string">'nexttrack'</span>, evt =&gt; &#123; ... &#125;)</span><br><span class="line"></span><br><span class="line">navigator.mediaSession.setActionHandler(<span class="string">'previoustrack'</span>, evt =&gt; &#123; ... &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// UI를 알림 컨트롤과 동기화</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 미디어가 로드되었으나 아직 플레이되지 않고 있을 때 유용한 코드</span></span><br><span class="line"></span><br><span class="line">navigator.mediaSession.playbackState = <span class="string">'playing'</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-voot-com-사례"><a href="#3-voot-com-사례" class="headerlink" title="3. voot.com 사례"></a><a href="#3-voot-com-사례" title="3. voot.com 사례"></a>3. voot.com 사례</h4><p>-인도는 2천 6백만대가 저성능 디바이스를 사용</p>
+<ul>
+<li>인터넷이 될 때 다운로드해서 오프라인 모드에서 미디어를 재생할 수 있음</li>
+<li>Index db를 삽입하여 다운로드한 리소스에 대한 기록을 남김<br>-&gt; 백그라운드를 불러온 리소스와 비교하여 현재 미디어를 확인 -&gt; 다운로드한 리소스를 캐시에 저장</li>
+</ul>
+<p>인도의 경우 데이터 환경이 안정적이지 않음<br>버스에서 vootGo에 로그인하여 wifi를 이용, 컨텐츠를 다운받을 수 있게 함</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="monaq.github.io/2017/11/02/chrome_dev_summit_2018/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -548,7 +767,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -575,7 +794,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
