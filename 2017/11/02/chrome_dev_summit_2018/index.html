@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="이 글은 https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb 을 발번역 한 것입니다. 원본과 함께 읽으시면 이해가 쉽습니다.  몇 가지 발표와 PMA홍보가 있었습니다.10 시간 분량의 Chrome Dev Sum">
+<meta name="keywords" content="번역">
+<meta property="og:type" content="article">
+<meta property="og:title" content="제가 Chrome Dev Summit 2017 영상을 다 보고 왔으니, 당신은 볼 필요가 없어요.">
+<meta property="og:url" content="monaq.github.io/2017/11/02/chrome_dev_summit_2018/index.html">
+<meta property="og:site_name" content="Monaq Devlog">
+<meta property="og:description" content="이 글은 https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb 을 발번역 한 것입니다. 원본과 함께 읽으시면 이해가 쉽습니다.  몇 가지 발표와 PMA홍보가 있었습니다.10 시간 분량의 Chrome Dev Sum">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-06T05:56:50.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="제가 Chrome Dev Summit 2017 영상을 다 보고 왔으니, 당신은 볼 필요가 없어요.">
+<meta name="twitter:description" content="이 글은 https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb 을 발번역 한 것입니다. 원본과 함께 읽으시면 이해가 쉽습니다.  몇 가지 발표와 PMA홍보가 있었습니다.10 시간 분량의 Chrome Dev Sum">
+
+
+
+
+
+
+  <link rel="canonical" href="monaq.github.io/2017/11/02/chrome_dev_summit_2018/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>제가 Chrome Dev Summit 2017 영상을 다 보고 왔으니, 당신은 볼 필요가 없어요. | Monaq Devlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Monaq Devlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="monaq.github.io/2017/11/02/chrome_dev_summit_2018/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Monica Kwon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Monaq Devlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">제가 Chrome Dev Summit 2017 영상을 다 보고 왔으니, 당신은 볼 필요가 없어요.
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-11-02 11:11:11" itemprop="dateCreated datePublished" datetime="2017-11-02T11:11:11+09:00">2017-11-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-06 14:56:50" itemprop="dateModified" datetime="2019-01-06T14:56:50+09:00">2019-01-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>이 글은 <a href="https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb" target="_blank" rel="noopener">https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb</a> 을 발번역 한 것입니다. 원본과 함께 읽으시면 이해가 쉽습니다.</p>
+</blockquote>
+<h2 id="몇-가지-발표와-PMA홍보가-있었습니다"><a href="#몇-가지-발표와-PMA홍보가-있었습니다" class="headerlink" title="몇 가지 발표와 PMA홍보가 있었습니다."></a><a href="#몇-가지-발표와-PMA홍보가-있었습니다" title="몇 가지 발표와 PMA홍보가 있었습니다."></a>몇 가지 발표와 PMA홍보가 있었습니다.</h2><p>10 시간 분량의 Chrome Dev Summit 2017 영상은 온라인에서 확인할 수 있습니다.<br>(<a href="https://www.youtube.com/watch?v=1-g1rvkORQ8&amp;list=PLNYkxOF6rcICUD5nBfRdAR6Fveosnqa5m" target="_blank" rel="noopener">https://www.youtube.com/watch?v=1-g1rvkORQ8&amp;list=PLNYkxOF6rcICUD5nBfRdAR6Fveosnqa5m</a>)</p>
+<p>너무 기니까 요약하자면: 구글은 PWA를 구축하고 javascript 파일 크기를 줄이기를 원하고 있습니다. 또한, 웹 컴포넌트를 사용하고 자동완성을 형성하고 싶어합니다.</p>
+<p>구글은 다음과 같은 몇 가지 기능을 발표했습니다.</p>
+<p>&amp; 결제, 인증, 안드로이드에서도 신뢰할 수 있는 웹 액티비티들, 크롬 개발도구와 크롬 유저 경험에 대한 리포트 등등…</p>
+<p>이에 대한 Reddit에서의 논의는 여기서 볼 수 있습니다(<a href="https://www.reddit.com/r/programming/comments/7910rg/i_watched_all_of_the_chrome_dev_summit_2017/" target="_blank" rel="noopener">https://www.reddit.com/r/programming/comments/7910rg/i_watched_all_of_the_chrome_dev_summit_2017/</a>)</p>
+<p>이에 대한 Hacker News의 논의는 여기서 볼 수 있습니다(<a href="https://news.ycombinator.com/item?id=15575109" target="_blank" rel="noopener">https://news.ycombinator.com/item?id=15575109</a>)</p>
+<p>일반적으로 구글은 Chrome Dev Summit 에서 다음과 같은 내용을 발표합니다.</p>
+<ul>
+<li>사람들이 사용했으면 하는 웹기술 홍보</li>
+<li>뉴스 발표 / 새로운 것에 대해서 또다시 발표하기 (가끔씩 이미 있는거랑 섞여있음)</li>
+<li>웹 개발자를 위한 실질적 조언 공유</li>
+</ul>
+<p>하지만 이 “공지 사항”은 종종 이미 있는 기술들을 홍보하고 싶어서 다시 발표하는 것입니다.<br>떄로는 이들은 실용적이지 않은 웹기술들을 옹호합니다. 예를 들어 베타버전에서 나올 새 기능이나 크롬에서만 작동하는 기술들 같은 것 말입니다.</p>
+<h3 id="구글이-원하는-것"><a href="#구글이-원하는-것" class="headerlink" title="구글이 원하는 것"></a><a href="#구글이-원하는-것" title="구글이 원하는 것"></a>구글이 원하는 것</h3><h4 id="프로그레시브-웹앱을-구축하는-것"><a href="#프로그레시브-웹앱을-구축하는-것" class="headerlink" title="* 프로그레시브 웹앱을 구축하는 것"></a><a href="#프로그레시브-웹앱을-구축하는-것" title="* 프로그레시브 웹앱을 구축하는 것"></a>* 프로그레시브 웹앱을 구축하는 것</h4><p>구글은 Service Worker를 이용해 오프라인일 때도 앱이 기능하게 개발해 주었으면 합니다. 하지만 Service Worker가 iOS에서 작동을 안 하기 때문에 문제가 잇습니다.<br>드디어 애플이 올해 초에 작업에 들어갔습니다. 운이 좋으면 iOS 12에서 사용 가능할 수도 있을 것입니다.</p>
+<h4 id="javascript-로-구현된-웹사이트의-전송량을-줄이기"><a href="#javascript-로-구현된-웹사이트의-전송량을-줄이기" class="headerlink" title="* javascript 로 구현된 웹사이트의 전송량을 줄이기"></a><a href="#javascript-로-구현된-웹사이트의-전송량을-줄이기" title="* javascript 로 구현된 웹사이트의 전송량을 줄이기"></a>* javascript 로 구현된 웹사이트의 전송량을 줄이기</h4><p>구글은 100달러 정도의 저렴한 안드로이드 폰에서 ‘time to interactive’ 이벤트를 실행하는 것을 목표로 합니다. 여유있는 서구권 국가의 웹개발자들은 성능이 훨씬 뛰어난 아이폰이나 고급 안드로이드 디바이스를 사용하는 경향이 있습니다.<br>(아이폰 8은 8mb의 l2 cpu 캐시를 보유하고 있으며, 최근에 출시된 안드로이드 폰들도 일반적으로 l2캐시는 탑재되어 있지 않다)<br>저렴한 폰의 경우 일반적으로 1mb의 압축되지 않은 자바스크립트나 150kb의 gzipped 파일만 제공합니다. 특히 신흥시장에 많은 제품이 팔릴 경우가 아니면 모든 웹 개발자가 이런 리미트에 맞춰 개발하게 하기는 쉽지 않습니다.<br>구글에서 권장하는 목표를 달성하려면 잘 작성된 js 프레임워크를 포기하고 새로 만들어야 할 때도 있습니다.</p>
+<h4 id="웹-컴포넌트-사용"><a href="#웹-컴포넌트-사용" class="headerlink" title="* 웹 컴포넌트 사용."></a><a href="#웹-컴포넌트-사용" title="* 웹 컴포넌트 사용."></a>* 웹 컴포넌트 사용.</h4><p>(여기서, 이것은 custom element와 shadow DOM 을 의미하며 HTML import는 포기한 것 같습니다.)<br>특히 Polymer를 사용하고 싶어하는 것 같습니다. 문제는, 웹 컴포넌트 API가 리액트와 비교해서 직접적으로 사용하기가 매우 어렵다는 점입니다.<br>그것은 프레임워크 시장에서 폴리머를 다시 끌어내고 있습니다. Svelte, Skate 나 Stencil 같은 다른 WC기반 프레임워크에서는 WC에서 추상화하여 편집 대상으로 다룹니다.<br>(WCs는 다른 큰 문제점을 가지고 있는데, shadow DOM에 대한 서버측 렌더링 방법이 존재하지 않는다는 겁니다. 특히, 서버 렌더링된 비 WC출력에서 클라이언트측의 WC를 합칠 수 있는 효율적인 방법이 없습니다)<br>또한 구글은 WC가 권장 목표를 달성하기 위한 중요한 전략이라고 느끼고 있습니다. 플랫폼을 사용하고 js에서 그것을 다시 재발생(reinvent)시키지 않는다면 믾은 자바스크립트 byte를 절약할 수 있습니다.</p>
+<h4 id="폼을-만들-때-자동완성을-지원하도록-해야-합니다-특히-로그인-및-자동완성의-경우"><a href="#폼을-만들-때-자동완성을-지원하도록-해야-합니다-특히-로그인-및-자동완성의-경우" class="headerlink" title="*폼을 만들 때 자동완성을 지원하도록 해야 합니다( 특히 로그인 및 자동완성의 경우)"></a><a href="#폼을-만들-때-자동완성을-지원하도록-해야-합니다-특히-로그인-및-자동완성의-경우" title="*폼을 만들 때 자동완성을 지원하도록 해야 합니다( 특히 로그인 및 자동완성의 경우)"></a>*폼을 만들 때 자동완성을 지원하도록 해야 합니다( 특히 로그인 및 자동완성의 경우)</h4><p>얼마나 많은 인기 쇼핑몰들이 오토필을 무시했는지 알면 충격적입니다.<br>이것은 모바일 브라우저에서 특히 중요합니다. 최근 몇 년 동안 크롬은 Credential Management API와 Payment Request API를 비롯한 새로운 자동완성 기능을 추가했지만, 크로스브라우징 지원이 좋지 않아 이 기능을 사이트에서 채택하기는 좀 시간이 걸립니다.</p>
+<h3 id="발표-내용"><a href="#발표-내용" class="headerlink" title="발표 내용"></a><a href="#발표-내용" title="발표 내용"></a>발표 내용</h3><h4 id="결제-이미-있는-거랑-비슷하지만-조금-다릅니다"><a href="#결제-이미-있는-거랑-비슷하지만-조금-다릅니다" class="headerlink" title="결제: 이미 있는 거랑 비슷하지만 조금 다릅니다."></a><a href="#결제-이미-있는-거랑-비슷하지만-조금-다릅니다" title="결제: 이미 있는 거랑 비슷하지만 조금 다릅니다."></a>결제: 이미 있는 거랑 비슷하지만 조금 다릅니다.</h4><p>Google Payment API가 언급됩니다. Google Checkout을 Google Wallet으로 대체하고 난 후, Android Pay를 교체하고 나서 문서에서 대담하게도 이를 “Google에서 결제하는 가장 새로운 방법”이라고 불렀습니다.<br>Google Payment API는 안드로이드 크롬에서만 작동합니다. 표준이긴 하지만 재대로 지원되지 않는 결제요청 API와 통합되었습니다.<br>시간이 흐르면 다른 플랫폼 및 다른 브라우저에서도 지원이 가능하길 바랍니다.</p>
+<p>동시에, Payment Request API는 모든 Chrome 플랫폼에서 사용할 수 있지만 예전엔 안드로이드에서만 사용할 수 있다고 발표했었습니다.</p>
+<h4 id="인증-이미-있는-것과-비슷하지만-조금-다릅니다"><a href="#인증-이미-있는-것과-비슷하지만-조금-다릅니다" class="headerlink" title="인증: 이미 있는 것과 비슷하지만 조금 다릅니다."></a><a href="#인증-이미-있는-것과-비슷하지만-조금-다릅니다" title="인증: 이미 있는 것과 비슷하지만 조금 다릅니다."></a>인증: 이미 있는 것과 비슷하지만 조금 다릅니다.</h4><p>“자동 로그인”과 “One-tap Sign Up” 두 가지 기능이 소개되었습니다.<br>물론, 그동안 구글 로그인을 통해 구글에 가입하거나 로그인할 수 있었습니다. (그들은 간단하게 “Google+ 로 로그인” 이라고 부릅니다.)<br>하지만 이 버전은 스크린 아래애서 애니메이션이 튀어나와 사용자가 구글에 로그인 할 수 있게 해 줍니다.<br>새로운 “one-tap” 플로우는 Credential Management API 를 polyfill하여 iOS에서도 사용할 수 있도록 고안되었습니다.</p>
+<h4 id="신뢰할-수-있는-웹-액티비티-Android-앱의-PWA-tab"><a href="#신뢰할-수-있는-웹-액티비티-Android-앱의-PWA-tab" class="headerlink" title="신뢰할 수 있는 웹 액티비티 : Android 앱의 PWA tab"></a><a href="#신뢰할-수-있는-웹-액티비티-Android-앱의-PWA-tab" title="신뢰할 수 있는 웹 액티비티 : Android 앱의 PWA tab"></a>신뢰할 수 있는 웹 액티비티 : Android 앱의 PWA tab</h4><p>신뢰할 수 있는 웹 액티비티는 URL 표시줄을 출력하지 않고 Android 앱에서 Chrome 의 커스텀 탭을 띄울 수 있는 방법입니다. 안트로이드 앱에서 맞춤 웹사이트를 스크린에 띄우고 구글 플레이 스토어에서 안드로이드 앱으로 PWA를 더욱 쉽게 패키징 할 수 있도록 설계되었습니다.</p>
+<h4 id="Chrome-개발자-도구에-대한-개선사항"><a href="#Chrome-개발자-도구에-대한-개선사항" class="headerlink" title="Chrome 개발자 도구에 대한 개선사항"></a><a href="#Chrome-개발자-도구에-대한-개선사항" title="Chrome 개발자 도구에 대한 개선사항"></a>Chrome 개발자 도구에 대한 개선사항</h4><p>대부분의 개발자 도구와 마찬가지로 설명하기가 어려운데, 그것이 어떻게 작동하는지 확인하려면 비디오를 봐야 합니다. 그들은 CSS 그리도 레이아웃, “local override”(개발자 도구에 저장된 Greasemonkey “사용자 스크립트”를 만드는 방법)<br>, 새로운 실시간 퍼포먼스 모니터링, 유사한 이벤트들을 필터링하고 그룹핑하는 console.log 향상 기능, 그리고 어플리케이션 탭의 PWA개선 사항을 보여 줍니다.</p>
+<h4 id="Chrome-사용자-환경-보고서"><a href="#Chrome-사용자-환경-보고서" class="headerlink" title="Chrome 사용자 환경 보고서"></a><a href="#Chrome-사용자-환경-보고서" title="Chrome 사용자 환경 보고서"></a>Chrome 사용자 환경 보고서</h4><p>크롬 사용자환경 보고서는 BigQuery입니다. 이는 상위 1000개의 웹사이트에 대한 실제 사용자 모니터링에 대한 쿼리가 가능합니다.<br>그것을 누가 어떻게 사용할지는 잘 모르겠지만, 누군가는 쿨하게 사용하기를 바랍니다.</p>
+<h3 id="발표-내용-1"><a href="#발표-내용-1" class="headerlink" title="발표 내용"></a><a href="#발표-내용-1" title="발표 내용"></a>발표 내용</h3><ul>
+<li>키노트(Keynote) - Ben Galbraith, Dion Almaer</li>
+<li>웹 경험을 위한 새로운 바 툴(The New Bar for Web Experiences) - Thao Tran, Chris Wilson</li>
+<li>운영체제와의 통합(Integrating with Operating Systems) -Owen Campbell-Moore</li>
+<li>진보된 웹앱으로 킥스타트 하기 (Kickstarting Your Journey to Progressive Web Apps) - Ewa Gasperowicz</li>
+<li>디폴트로 빨라지기: 최신 베스트 로딩 프랙티스 (Fast by Default: Modern Loading Best Practices) - Addy Osmani, Ilya Grigorik and Bryan McQuade</li>
+<li>Workbox: 유연한 PWA 라이브러리 (Workbox: Flexible PWA Libraries) - Jeff Posnick</li>
+<li>워드프레스 + PWA(Wordpress + PWAs) - Surma and Dan Walmsley</li>
+<li>점진적 이커머스 개선(Progressively Improving E-Commerce)- Sam Dutton and Rowan Merewood</li>
+<li>최신 미디어 환경 구축(Building a Modern Media Experience) - Francois Beaufort and John Pallett</li>
+<li>전 세계를 위한 웹(The Web for the Entire World) - Tal Oppenheimer</li>
+<li>최신 툴링, 테스팅, 그리고 자동화(Modern Tooling, Testing, and Automation) - Eric Bidelman and Paul Irish</li>
+<li>웹 로딩의 미래 (The Future of Loading on the Web) - Sam Saccone</li>
+<li>V8의 오늘날과 미래(V8 Today and in the Future) - Thomas Nattestad</li>
+<li>Real World WebAssembly(Real World WebAssembly) - Alex Danilo and Deepti Gandluri</li>
+<li>엔드투엔드 폴리머 앱과 최신 웹 플랫폼(End-to-End Polymer Apps and the Modern Web Platform) - Taylor Savage</li>
+<li>lit-HTML(lit-HTML) - Justin Fagnani</li>
+<li>앱 없이 미디어 만들기(Creating Media Without an App) - Mat Scales, Jennifer Lin, Peter Shin</li>
+<li>VR과 AR(The Future of Immersive Experiences on the Web with VR and AR) - Josh Carpenter and Brandon Jones</li>
+</ul>
+<h3 id="QnA"><a href="#QnA" class="headerlink" title="QnA"></a><a href="#QnA" title="QnA"></a>QnA</h3><p>질답시간이 대부분의 발표보다 더 좋았다고 생각합니다. 제 의견이고요. 제 질문에 대답을 많이 해줬기 때문은 아닙니다 :)</p>
+<p>진행자 : Chris Wilson<br>패널 : Darin Fisher, Parisa Tabriz, Grace Kloba, Thao Tran, Tal Oppenheimer, Matt McNulty, Alex Komoroske 및 Alex Russell</p>
+<ul>
+<li>AMP vs PWA? : 목표는 빠른 웹입니다.</li>
+<li>올해 PWA 서밋이 없는 이유는 뭐죠? : PWA 뿐만 아니라 다 없어요.</li>
+<li>Javascript binary AST를 지원합니까: 좀 다른 방식이 있습니다, Service Worker가 파싱되고 컴파일 된 결과를 캐싱하는 거 말고도요.<br>바이너리 AST는 장시간에 걸친 결과를 가져오며, 그걸 우리가 완벽하게 이해하진 못합니다.</li>
+<li>바탕화면에서 “홈 스크린에 추가”하는 것은? : 지금 가능하긴 한데, 묻혀 있습니다. Owen은 뭔가 새로운 일이 벌어지는 스크린샷을 보여 주었었죠. 몇 달 안에 보실 수 있을 겁니다. (Chrome flag에서 찾아보세요)</li>
+<li>ES6를 트랜스파일 하거나 직접 써야 하나요? : User는 어떤 사람이죠? 당신의 유저들이 그걸 지원하면 직접 써도 되고요, 아니면 트랜스파일 해야죠.</li>
+<li>여러 팀이 렌더링 엔진이나 하나의 큰 브라우저에서 작업할 순 없나요? : 웹 개발자로서, 하나의 브라우저가 필요하죠. 하지만 경쟁에 있어서, 하나의 큰 브라우저는 정체하거나 멈출 수 없다는 것을 의미합니다.<br>브라우저 전쟁은 지금은 훨씬 사그라들었습니다. 우리는 서로 협력하면서 좋게 일하고 있습니다. 이러한 기술적 문제에 접근할 때, 다양성에는 고유한 가치가 있다고 할 수 있습니다.</li>
+<li>PWA 및 안드로이드 인스턴트 앱에 대한 구글의 정체성 위기는 어떻게 될까요? : 구글 내부에서는 경쟁적인 분위기를 중시합니다. 세상엔 좋은 선택지들이 많습니다,.</li>
+<li>Chrome에서만 돌아가는 사이트는 어떤가요? : 저희는 그런 걸 좋아하지 않아요. 저희는 내부적으로 그런 것들을 방지하려고 노력합니다.</li>
+<li>왜 GPS에 PWA를 설치할 수 없나요? : 음, 그건 할 수 있습니다. 이제는 Trusted Web Activities를 통해서 더 쉽게 할 수 있죠.</li>
+<li>향후 10년간 무엇을 가장 내세울 만 한가요?:<br>-웹이 모바일 이후에 form factor의 다음 변화에서도 생존할 수 있도록 합니다.<br>-건강한 경쟁이 가장 자랑스러워요. -사용자를 우선시합니다. -우리는 모든 사용자를 위한 웹을 구축합니다. -한번 구축하면 어디서나 작동할 수 있습니다. -다음 세대의 플랫폼 핸들링. -HTTPS의 성장 및 안전하고 검사 가능한 PKI도입. -장기간 근무</li>
+</ul>
+<h4 id="프레임워크-패널"><a href="#프레임워크-패널" class="headerlink" title="프레임워크 패널"></a><a href="#프레임워크-패널" title="프레임워크 패널"></a>프레임워크 패널</h4><ul>
+<li>프레임워크에 가장 도움이 되는 새로운 브라우저 기능은 뭔가요?:</li>
+</ul>
+<p>-DOMChangeList.</p>
+<p>-맞아요. DOMChangeList 및 Observables</p>
+<p>-웹 작업자를위한 향상된 개발 도구.</p>
+<p>-Real weak references</p>
+<p>-WC가 네이티브 컴포넌트를 더 많이 수행하도록 허용하지 않습니다.</p>
+<p>-모든 요소를 ​​비동기로 만듭니다. Async append, DOMChangeList와 유사합니다.</p>
+<ul>
+<li>프레임워크를 선택하려면 어떤 기준으로 봐야 하나요? : byte의 관점에서 얼마나 많은 headroom에 필요한가- 를 기준으로 보면 됩니다</li>
+<li><p>어떻게 interop을 합니까? : 뭐 괜찮을거에요. Vue가 개척할 거니까요. Preact는 Vue 구성 요소를 가져올 수 있어요.<br>-우리 모두 웹 컴포넌트를 컴파일하는 데 동의합니다.<br>-WC는 interop을 수행 할 수 있게 설계되었습니다.<br>-Angular 컴포넌트가 WC를 넘어서면 좋을 겁니다.<br>-WC는 좋지만, React팀에서는 React 컴포넌트를 WC로 대체하는 게 좋다고 확신은 못 합니다. 사람들은 가상돔을 제거할 수 있다고들 합니다. 그러나 캡슐화 뿐만 아니라 메모이제이션, 변경사항 계산, 스케줄링 등에 사용하죠. WC와 가상돔은 직교해요. SKateJS는 커스텀 요소에 가상돔을 사용하고 있어요.</p>
+</li>
+<li><p>웹어셈블리는 프레임워크에 어떤 영향을 미칩니까? : 그것은 JS를 우선시합니다. 성능적으로 중요한 부분을 위해서 polyfill로 사용할 것입니다.</p>
+</li>
+</ul>
+<hr>
+<p>번역하고 나니 번역기 돌린 것 같아서 계속 업데이트 할게요<br>원본: (<a href="https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb" target="_blank" rel="noopener">https://redfin.engineering/i-watched-all-of-the-chrome-dev-summit-2017-videos-so-you-dont-have-to-9b62a593c3cb</a>)</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/번역/" rel="tag"># 번역</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/03/building_a_modern_media_experience/" rel="prev" title="Building a Modern Media Experience (Chrome Dev Summit 2017) from Chrome Media Team">
+                Building a Modern Media Experience (Chrome Dev Summit 2017) from Chrome Media Team <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Monica Kwon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#몇-가지-발표와-PMA홍보가-있었습니다"><span class="nav-number">1.</span> <span class="nav-text">몇 가지 발표와 PMA홍보가 있었습니다.</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#구글이-원하는-것"><span class="nav-number">1.1.</span> <span class="nav-text">구글이 원하는 것</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#프로그레시브-웹앱을-구축하는-것"><span class="nav-number">1.1.1.</span> <span class="nav-text">* 프로그레시브 웹앱을 구축하는 것</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#javascript-로-구현된-웹사이트의-전송량을-줄이기"><span class="nav-number">1.1.2.</span> <span class="nav-text">* javascript 로 구현된 웹사이트의 전송량을 줄이기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#웹-컴포넌트-사용"><span class="nav-number">1.1.3.</span> <span class="nav-text">* 웹 컴포넌트 사용.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#폼을-만들-때-자동완성을-지원하도록-해야-합니다-특히-로그인-및-자동완성의-경우"><span class="nav-number">1.1.4.</span> <span class="nav-text">*폼을 만들 때 자동완성을 지원하도록 해야 합니다( 특히 로그인 및 자동완성의 경우)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#발표-내용"><span class="nav-number">1.2.</span> <span class="nav-text">발표 내용</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#결제-이미-있는-거랑-비슷하지만-조금-다릅니다"><span class="nav-number">1.2.1.</span> <span class="nav-text">결제: 이미 있는 거랑 비슷하지만 조금 다릅니다.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#인증-이미-있는-것과-비슷하지만-조금-다릅니다"><span class="nav-number">1.2.2.</span> <span class="nav-text">인증: 이미 있는 것과 비슷하지만 조금 다릅니다.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#신뢰할-수-있는-웹-액티비티-Android-앱의-PWA-tab"><span class="nav-number">1.2.3.</span> <span class="nav-text">신뢰할 수 있는 웹 액티비티 : Android 앱의 PWA tab</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chrome-개발자-도구에-대한-개선사항"><span class="nav-number">1.2.4.</span> <span class="nav-text">Chrome 개발자 도구에 대한 개선사항</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chrome-사용자-환경-보고서"><span class="nav-number">1.2.5.</span> <span class="nav-text">Chrome 사용자 환경 보고서</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#발표-내용-1"><span class="nav-number">1.3.</span> <span class="nav-text">발표 내용</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QnA"><span class="nav-number">1.4.</span> <span class="nav-text">QnA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#프레임워크-패널"><span class="nav-number">1.4.1.</span> <span class="nav-text">프레임워크 패널</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Monica Kwon</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

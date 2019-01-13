@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="세미콜론세미콜론 성대 페북[사진 성균관대학교 대나무숲 페이스북 캡처]   자바스크립트에서의 세미콜론(;) 사용에 대한 논쟁이 갑자기 다시 불이 붙는 이유는 여기서 알 수 있었다.semi-colon 사용을 의무화하는 것을 고려중인 TC39  as new syntactic features are added to ECMAScript, additional case">
+<meta name="keywords" content="개발,뻘글">
+<meta property="og:type" content="article">
+<meta property="og:title" content="세미콜론, 그 끝나지 않는 논쟁">
+<meta property="og:url" content="monaq.github.io/2018/01/28/semicolon/index.html">
+<meta property="og:site_name" content="Monaq Devlog">
+<meta property="og:description" content="세미콜론세미콜론 성대 페북[사진 성균관대학교 대나무숲 페이스북 캡처]   자바스크립트에서의 세미콜론(;) 사용에 대한 논쟁이 갑자기 다시 불이 붙는 이유는 여기서 알 수 있었다.semi-colon 사용을 의무화하는 것을 고려중인 TC39  as new syntactic features are added to ECMAScript, additional case">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="/images/semicolon/semicolon.jpg">
+<meta property="og:updated_time" content="2019-01-06T06:48:36.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="세미콜론, 그 끝나지 않는 논쟁">
+<meta name="twitter:description" content="세미콜론세미콜론 성대 페북[사진 성균관대학교 대나무숲 페이스북 캡처]   자바스크립트에서의 세미콜론(;) 사용에 대한 논쟁이 갑자기 다시 불이 붙는 이유는 여기서 알 수 있었다.semi-colon 사용을 의무화하는 것을 고려중인 TC39  as new syntactic features are added to ECMAScript, additional case">
+<meta name="twitter:image" content="/images/semicolon/semicolon.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="monaq.github.io/2018/01/28/semicolon/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>세미콜론, 그 끝나지 않는 논쟁 | Monaq Devlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Monaq Devlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="monaq.github.io/2018/01/28/semicolon/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Monica Kwon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Monaq Devlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">세미콜론, 그 끝나지 않는 논쟁
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-28 11:11:11" itemprop="dateCreated datePublished" datetime="2018-01-28T11:11:11+09:00">2018-01-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-06 15:48:36" itemprop="dateModified" datetime="2019-01-06T15:48:36+09:00">2019-01-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="세미콜론"><a href="#세미콜론" class="headerlink" title="세미콜론"></a><a href="#세미콜론" title="세미콜론"></a>세미콜론</h3><p><a href="https://monaq.github.io/images/semicolon/semicolon.jpg" title="세미콜론 성대 페북" target="_blank" rel="noopener"><img src="/images/semicolon/semicolon.jpg" alt="세미콜론 성대 페북"></a>세미콜론 성대 페북<br>[사진 성균관대학교 대나무숲 페이스북 캡처]  </p>
+<p>자바스크립트에서의 세미콜론(;) 사용에 대한 논쟁이 갑자기 다시 불이 붙는 이유는 여기서 알 수 있었다.<br><a href="https://github.com/tc39/ecma262/pull/1062" target="_blank" rel="noopener">semi-colon 사용을 의무화하는 것을 고려중인 TC39</a></p>
+<blockquote>
+<p>as new syntactic features are added to ECMAScript, additional cases requiring explicit semicolons emerge over time. As such, consistently explicit semicolon use is recommended.<br>새로운 문법이 ECMA 스크립트로 추가되는 과정에서 명시적으로 세미콜론을 사용해야 하는 경우가 나타나고 있다. 그러므로 일관성 있게 세미콜론을 명시적으로 사용하는 것을 권고한다.  </p>
+<p>(<a href="https://jayjnu.github.io/2018/01/24/2018-jan-3rd-week/" target="_blank" rel="noopener">https://jayjnu.github.io/2018/01/24/2018-jan-3rd-week/</a> 에서 인용)</p>
+</blockquote>
+<p>풀리퀘가 하도 많아서 접속 장애가 일어나는 경우는 처음 봤다.;;<br>자바스크립트에서의 세미콜론 사용에 대한 이야기는 끝나지 않는 논쟁이긴 하지만 매우 접근이 쉽고 재미있는 논쟁거리이기도 하다.<br>아직 경험에서 우러나오는 주장을 펼치기에 부족한 감이 있지만 알고 있는 요점만 정리해서 글을 읽는 여러분에게 선택을 맡기도록 하려고 한다. 참고로 나는 앞으로 세미콜론을 쓸 것이다.  </p>
+<h3 id="자바스크립트에서는-세미콜론을-빼도-상관없다"><a href="#자바스크립트에서는-세미콜론을-빼도-상관없다" class="headerlink" title="자바스크립트에서는 세미콜론을 빼도 상관없다?"></a><a href="#자바스크립트에서는-세미콜론을-빼도-상관없다" title="자바스크립트에서는 세미콜론을 빼도 상관없다?"></a>자바스크립트에서는 세미콜론을 빼도 상관없다?</h3><p>자바스크립트에서는 세미콜론을 생략할 수 있는 점이 매우 편리하다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>; i++</span><br><span class="line"></span><br><span class="line"><span class="comment">// 세미콜론이 꼭 필요한 경우</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">i++</span><br><span class="line"></span><br><span class="line"><span class="comment">// 세미콜론이 들어가도 되고 안 들어가도 되는 경우</span></span><br></pre></td></tr></table></figure>
+<p>이는 ECMAScript 표준에서 지원하는 자동 세미콜론 삽입 덕분이다. 이는 특정 문맥에서 생략된 세미콜론을 추론하여 파싱해 주는 매커니즘이다.<br>세미콜론 자동 삽입 규칙은 다음과 같다.</p>
+<ul>
+<li>한 줄 이상의 새로운 행</li>
+<li>프로그램 입력의 끝부분</li>
+<li>} 토큰 전</li>
+</ul>
+<p>다시 말하면 이 경우 외에는 세미콜론을 명시해 줘야 한다는 뜻이다.</p>
+<p>또 다른 규칙을 보자.</p>
+<ul>
+<li>세미콜론은 다음 입력토큰이 존재하지 않을 경우에만 파싱된다.</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line"></span><br><span class="line">( f() )</span><br></pre></td></tr></table></figure>
+<p>위 코드는 문제없다.  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line"></span><br><span class="line">f ()</span><br></pre></td></tr></table></figure>
+<p>위 코드는 문제가 된다.<br>다음과 같이 해석되기 때문이다.  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = b f ()</span><br></pre></td></tr></table></figure>
+<p>다음과 같은 배열 리터럴의 경우도 문제가 된다.  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a = b</span><br><span class="line"></span><br><span class="line">[<span class="string">"x"</span>,<span class="string">"y"</span>,<span class="string">"z"</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>다음과 같이 파싱되기 때문이다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = b[<span class="string">"x"</span>,<span class="string">"y"</span>,<span class="string">"z"</span>].forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">   ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>그래서 자동 세미콜론 삽입기능의 도움을 받으려면 (, [, +, -, / 등의 표현식 연산자나 접두어 토큰을 쓸 때 조심해야 한다. 삽질의 사직이 될 수 있음.  </p>
+<p>위의 경우를 제외하면, 또는 완벽하게 코딩 초심자가 아닌 이상은 에러를 보기 쉽지 않고 최근의 ECMA6나 컴프레셔들은 완벽한 세미콜론 자동 삽입을 지원하므로 우리가 신경쓸 것이 거의 없다.<br>그렇다면 세미콜론 사용의 장/단점은 무엇일까?  </p>
+<h3 id="세미콜론은-필요-없다"><a href="#세미콜론은-필요-없다" class="headerlink" title="세미콜론은 필요 없다?"></a><a href="#세미콜론은-필요-없다" title="세미콜론은 필요 없다?"></a>세미콜론은 필요 없다?</h3><ol>
+<li><p>코드량이 줄어든다<br>세미콜론 또한 코드의 한 부분이므로, 붙이지 않아도 된다면 실질적인 코드량이 줄어든다.</p>
+</li>
+<li><p>일관성있다<br>일관된 한 가지의 규칙을 가져야 한다면 세미콜론을 붙이지 않는 것이 낫다. 예를 들어 if나 for문, switch문을 쓸 때는 블록 뒤에 세미콜론을 붙이지 않는 것이 맞지만 습관적으로 닫히는 } 뒤에 일관적으로 세미콜론을 붙일 수 있는데, 헷갈리게 한다면 차라리 다 빼는 것이 맞다.</p>
+</li>
+<li><p>예쁘다<br>단순히 예쁘고 깔끔하다는 이유 하나만으로도 세미콜론을 빼는 이유는 충분하다.<br>사실 세미콜론을 쓰지 않는 사람들한테 물어보면 10의 6은 이 대답으로 시작한다. 개인적인 취향이기는 하나, 덕지덕지 붙은 세미콜론을 제거하는 것만으로도 심미적인 만족감이 드는 것은 개발자로서 어쩔 수 없다.</p>
+</li>
+</ol>
+<h3 id="세미콜론은-강제되어야-한다"><a href="#세미콜론은-강제되어야-한다" class="headerlink" title="세미콜론은 강제되어야 한다?"></a><a href="#세미콜론은-강제되어야-한다" title="세미콜론은 강제되어야 한다?"></a>세미콜론은 강제되어야 한다?</h3><ol>
+<li><p>안전성<br>예시를 통해 자동 세미콜론 삽입기능이 에러를 뱉어낼 수 있는 경우를 몇 가지 보았는데, 이러한 오류가 발생할 여지가 있다면 그냥 처음부터 명시적으로 세미콜론을 사용하는 것이 좋다.<br>예상할 수 있는 코드를 작성하는 것이 자동 파싱보다 더욱 안전한 것은 반박 불가능한 사실이다.</p>
+</li>
+<li><p>속도<br>인터프리터가 코드를 해석할 때 세미콜론을 붙이지 않는 경우 조금 더 느리다는 비교가 있다.<br><a href="https://jsperf.com/asi-performance/2" target="_blank" rel="noopener">https://jsperf.com/asi-performance/2</a><br>하지만 아주 미미하다.</p>
+</li>
+<li><p>발전에 따른 부합성<br>TC39의 발표에 동의하는 것으로, 앞으로 언어가 발전함에 있어서 세미콜론을 사용해야 하는 경우는 더욱 더 늘어날 것이라는 주장이다. 자세한 것은 TC39의 주장을 읽어보는 것이 도움이 될 것이다.</p>
+</li>
+</ol>
+<hr>
+<p>무엇이 표준이 될지는 모르겠지만, 이미 많은 사람들이 자바스크립트의 유연성을 잘 이용하고 있다. 한번 들인 코딩 습관을 고치는 것은 퍼포먼스 측면에서나 노력 면에서나 아주 괴로운 일임에 틀림없다.<br>뭐 세미콜론을 강제하는 것이 표준이 된다 하더라도, linter나 pretter 등을 사용하면 문제되지 않을 부분이기도 하다. 그러나 이유를 알고 사용하는 것과 모르고 사용하는 것의 차이가 분명히 존재하므로 한 번씩 공부해 보면 좋은 주제일 것 같다.</p>
+<p>나 같은 경우는 grunt로 여러 js파일을 minify하는 과정에서 예상했던 코드로 파싱되지 않아 에러를 본 일이 있고, 객체 선언 뒤에 세미콜론이 없다며 크로스브라우징이 되지 않았던 경험도 있었다 ( ie 구버전에서 에러가 났을 때 정확한 원인을 뱉어 주지 않는 경우가 있어 이틀간 삽질을 했었다 )<br>이러한 경우를 방지하기 위해서라도 명시적으로 세미콜론을 사용하는 습관을 들일 예정이다.<br>나같은 경우 툴 사용이 익숙하지 않아 그렇다 치지만 여러분은 linter에 익숙해져 있을 테니 조금 더 순조롭게 코딩 스타일을 지켜나갈 수 있을 것이라 생각한다.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/개발/" rel="tag"># 개발</a>
+          
+            <a href="/tags/뻘글/" rel="tag"># 뻘글</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/21/interview_1/" rel="next" title="자바스크립트 개발자로서 알아야 할 10가지 면접질문(1)">
+                <i class="fa fa-chevron-left"></i> 자바스크립트 개발자로서 알아야 할 10가지 면접질문(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/25/redux/" rel="prev" title="redux">
+                redux <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Monica Kwon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#세미콜론"><span class="nav-number">1.</span> <span class="nav-text">세미콜론</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#자바스크립트에서는-세미콜론을-빼도-상관없다"><span class="nav-number">2.</span> <span class="nav-text">자바스크립트에서는 세미콜론을 빼도 상관없다?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#세미콜론은-필요-없다"><span class="nav-number">3.</span> <span class="nav-text">세미콜론은 필요 없다?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#세미콜론은-강제되어야-한다"><span class="nav-number">4.</span> <span class="nav-text">세미콜론은 강제되어야 한다?</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Monica Kwon</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

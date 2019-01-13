@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="redux 간단개요학습목표리액트 필터링 기능 App.js예제에서 동작 원리를 알아본다.    Flux 패턴은 라이브러리가 아닌 하나의 설계 방법론일 뿐이다. parent-child 관계가 아닌 각각의 컴포넌트끼리 데이터를 교류하기 위해 글로벌 이벤트시스템을 설정하는 방법. App.js1. Action 만들기.action: 무슨 변화를 일으켜야 하는지 알려주">
+<meta name="keywords" content="개발,redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redux">
+<meta property="og:url" content="monaq.github.io/2018/03/25/redux/index.html">
+<meta property="og:site_name" content="Monaq Devlog">
+<meta property="og:description" content="redux 간단개요학습목표리액트 필터링 기능 App.js예제에서 동작 원리를 알아본다.    Flux 패턴은 라이브러리가 아닌 하나의 설계 방법론일 뿐이다. parent-child 관계가 아닌 각각의 컴포넌트끼리 데이터를 교류하기 위해 글로벌 이벤트시스템을 설정하는 방법. App.js1. Action 만들기.action: 무슨 변화를 일으켜야 하는지 알려주">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-06T06:56:30.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redux">
+<meta name="twitter:description" content="redux 간단개요학습목표리액트 필터링 기능 App.js예제에서 동작 원리를 알아본다.    Flux 패턴은 라이브러리가 아닌 하나의 설계 방법론일 뿐이다. parent-child 관계가 아닌 각각의 컴포넌트끼리 데이터를 교류하기 위해 글로벌 이벤트시스템을 설정하는 방법. App.js1. Action 만들기.action: 무슨 변화를 일으켜야 하는지 알려주">
+
+
+
+
+
+
+  <link rel="canonical" href="monaq.github.io/2018/03/25/redux/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>redux | Monaq Devlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Monaq Devlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="monaq.github.io/2018/03/25/redux/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Monica Kwon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Monaq Devlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">redux
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-25 11:11:11" itemprop="dateCreated datePublished" datetime="2018-03-25T11:11:11+09:00">2018-03-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-06 15:56:30" itemprop="dateModified" datetime="2019-01-06T15:56:30+09:00">2019-01-06</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="redux-간단개요"><a href="#redux-간단개요" class="headerlink" title="redux 간단개요"></a><a href="#redux-간단개요" title="redux 간단개요"></a>redux 간단개요</h1><h3 id="학습목표"><a href="#학습목표" class="headerlink" title="학습목표"></a><a href="#학습목표" title="학습목표"></a>학습목표</h3><p>리액트 필터링 기능 App.js예제에서 동작 원리를 알아본다.  </p>
+<hr>
+<p>Flux 패턴은 라이브러리가 아닌 하나의 설계 방법론일 뿐이다.</p>
+<p>parent-child 관계가 아닌 각각의 컴포넌트끼리 데이터를 교류하기 위해 글로벌 이벤트시스템을 설정하는 방법.</p>
+<h3 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a><a href="#App-js" title="App.js"></a>App.js</h3><h4 id="1-Action-만들기"><a href="#1-Action-만들기" class="headerlink" title="1. Action 만들기."></a><a href="#1-Action-만들기" title="1. Action 만들기."></a>1. Action 만들기.</h4><p>action: 무슨 변화를 일으켜야 하는지 알려주는 객체.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setFilter</span>(<span class="params">by</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">type</span>: <span class="string">'SET\_FILTER'</span>, by&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-reducer-만들기"><a href="#2-reducer-만들기" class="headerlink" title="2. reducer 만들기."></a><a href="#2-reducer-만들기" title="2. reducer 만들기."></a>2. reducer 만들기.</h4><p>reducer: action으로부터 정보를 받아서 앱 상태를 어떻게 바꿀지 정의하는 객체. (action을 subscribe하고 있는놈)</p>
+<p>초기값 설정  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> initialState = &#123;</span><br><span class="line"></span><br><span class="line">  filterBy: <span class="string">''</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>리듀서 만들기  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">reducer</span>(<span class="params">state = initialState, action</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (action.type) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">'SET\_FILTER'</span>:</span><br><span class="line"></span><br><span class="line">      <span class="built_in">console</span>.log(\<span class="string">`Our filter was <span class="subst">$&#123;state.filterBy&#125;</span> but is now <span class="subst">$&#123;action.by&#125;</span>!`</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">Object</span>.assign(&#123;&#125;, state, &#123;</span><br><span class="line"></span><br><span class="line">        filterBy: action.by</span><br><span class="line"></span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> state</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>순수함수인 reducer는 반드시 parameter값에만 의존되어야 함.  </li>
+</ul>
+<h4 id="3-store-생성"><a href="#3-store-생성" class="headerlink" title="3. store 생성"></a><a href="#3-store-생성" title="3. store 생성"></a>3. store 생성</h4><p>store: 앱의 state를 총괄적으로 관리하는 Single Source of Truth  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(reducer)</span><br></pre></td></tr></table></figure>
+<p>store생성시 Root Reducer를 담아 전달함</p>
+<blockquote>
+<p>여기서는 리듀서가 하나뿐이지만, 리듀서가 여러개일 경우 combineReducers()로 한개의 root reducer를 만들어 전달한다.</p>
+</blockquote>
+<h4 id="4-connect"><a href="#4-connect" class="headerlink" title="4. connect"></a><a href="#4-connect" title="4. connect"></a>4. connect</h4><p>-&gt;리액트 컴포넌트를 redux store에 매핑 시키는 api</p>
+<p>store의 state를 컴포넌트에서 받은 props에 매핑  </p>
+<pre><code class="javascript">
+<span class="keyword">const</span> mapStateToProps = <span class="function">(<span class="params">state</span>) =&gt;</span> {
+
+  <span class="keyword">return</span> {
+
+    filterBy: state.filterBy
+
+  }
+
+}
+
+</code></pre>
+<p>컴포넌트의 어떤 함수형 props를 실행했을 때 특정한 action을 dispatch하도록 설정</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>const mapDispatchToProps = (dispatch) =&gt; {</p>
+<p>  return {</p>
+<pre><code>updateFilter: (ev) =&gt; dispatch(setFilter(ev.target.value))
+</code></pre><p>  }</p>
+<p>}</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/개발/" rel="tag"># 개발</a>
+          
+            <a href="/tags/redux/" rel="tag"># redux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/28/semicolon/" rel="next" title="세미콜론, 그 끝나지 않는 논쟁">
+                <i class="fa fa-chevron-left"></i> 세미콜론, 그 끝나지 않는 논쟁
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/02/git_convention/" rel="prev" title="git 운용 전략">
+                git 운용 전략 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Monica Kwon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#redux-간단개요"><span class="nav-number">1.</span> <span class="nav-text">redux 간단개요</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#학습목표"><span class="nav-number">1.0.1.</span> <span class="nav-text">학습목표</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#App-js"><span class="nav-number">1.0.2.</span> <span class="nav-text">App.js</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Action-만들기"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">1. Action 만들기.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-reducer-만들기"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">2. reducer 만들기.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-store-생성"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">3. store 생성</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-connect"><span class="nav-number">1.0.2.4.</span> <span class="nav-text">4. connect</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Monica Kwon</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
