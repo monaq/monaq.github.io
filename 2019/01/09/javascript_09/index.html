@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="오브젝트9.1 프로퍼티 리스트 책 참고.9.2 Object 분류 오브젝트: 0개 이상의 프로퍼티로 구성되는 오브젝트 빌트인 오브젝트: 렌더링 과정에서 자바스크립트가 생성하는 오브젝트 네이티브 오브젝트: 자바스크립트 프로그램을 실행할 때 생성되는 오브젝트 호스트 오브젝트: 호스트 환경에서 자바스크립트 실행 환경을 보완, 지원하기 위해 제공하는 오브젝트(ex.">
+<meta name="keywords" content="개발,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="자바스크립트의 언어적 개념 9">
+<meta property="og:url" content="monaq.github.io/2019/01/09/javascript_09/index.html">
+<meta property="og:site_name" content="Monaq Devlog">
+<meta property="og:description" content="오브젝트9.1 프로퍼티 리스트 책 참고.9.2 Object 분류 오브젝트: 0개 이상의 프로퍼티로 구성되는 오브젝트 빌트인 오브젝트: 렌더링 과정에서 자바스크립트가 생성하는 오브젝트 네이티브 오브젝트: 자바스크립트 프로그램을 실행할 때 생성되는 오브젝트 호스트 오브젝트: 호스트 환경에서 자바스크립트 실행 환경을 보완, 지원하기 위해 제공하는 오브젝트(ex.">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-13T11:17:00.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="자바스크립트의 언어적 개념 9">
+<meta name="twitter:description" content="오브젝트9.1 프로퍼티 리스트 책 참고.9.2 Object 분류 오브젝트: 0개 이상의 프로퍼티로 구성되는 오브젝트 빌트인 오브젝트: 렌더링 과정에서 자바스크립트가 생성하는 오브젝트 네이티브 오브젝트: 자바스크립트 프로그램을 실행할 때 생성되는 오브젝트 호스트 오브젝트: 호스트 환경에서 자바스크립트 실행 환경을 보완, 지원하기 위해 제공하는 오브젝트(ex.">
+
+
+
+
+
+
+  <link rel="canonical" href="monaq.github.io/2019/01/09/javascript_09/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>자바스크립트의 언어적 개념 9 | Monaq Devlog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Monaq Devlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="monaq.github.io/2019/01/09/javascript_09/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Monica Kwon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Monaq Devlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">자바스크립트의 언어적 개념 9
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-09 11:11:11" itemprop="dateCreated datePublished" datetime="2019-01-09T11:11:11+09:00">2019-01-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-13 20:17:00" itemprop="dateModified" datetime="2019-01-13T20:17:00+09:00">2019-01-13</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="오브젝트"><a href="#오브젝트" class="headerlink" title="오브젝트"></a>오브젝트</h1><h2 id="9-1-프로퍼티-리스트"><a href="#9-1-프로퍼티-리스트" class="headerlink" title="9.1 프로퍼티 리스트"></a>9.1 프로퍼티 리스트</h2><ul>
+<li>책 참고.<h2 id="9-2-Object-분류"><a href="#9-2-Object-분류" class="headerlink" title="9.2 Object 분류"></a>9.2 Object 분류</h2></li>
+<li>오브젝트: 0개 이상의 프로퍼티로 구성되는 오브젝트</li>
+<li>빌트인 오브젝트: 렌더링 과정에서 자바스크립트가 생성하는 오브젝트</li>
+<li>네이티브 오브젝트: 자바스크립트 프로그램을 실행할 때 생성되는 오브젝트</li>
+<li>호스트 오브젝트: 호스트 환경에서 자바스크립트 실행 환경을 보완, 지원하기 위해 제공하는 오브젝트(ex. DOM에서 제공하는 오브젝트)</li>
+</ul>
+<h2 id="9-3-new-Object"><a href="#9-3-new-Object" class="headerlink" title="9.3 new Object()"></a>9.3 new Object()</h2><ul>
+<li><p>인스턴스를 생성하여 반환한다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">console</span>.log(obj); <span class="comment">// [object Object]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> numObj = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>);</span><br><span class="line"><span class="keyword">var</span> objNumber = <span class="keyword">new</span> <span class="built_in">Object</span>(numObj);</span><br><span class="line"><span class="built_in">console</span>.log(numObj === objNumber); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(<span class="number">1234</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> obj); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(obj); <span class="comment">//1234</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Object</span>(<span class="literal">true</span>)); <span class="comment">//true</span></span><br><span class="line"><span class="keyword">var</span> nodes = <span class="built_in">document</span>.getElementByTagName(<span class="string">'script'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> <span class="built_in">Object</span>(nodes[<span class="number">0</span>])) <span class="comment">// [object HTMLScriptElement]</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>책 참고</p>
+<h2 id="9-4-Object"><a href="#9-4-Object" class="headerlink" title="9.4 Object()"></a>9.4 Object()</h2></li>
+<li>Object() 와 new Object()로 생성한 겂은 같다.<h2 id="9-5-문자열-표시-반환"><a href="#9-5-문자열-표시-반환" class="headerlink" title="9.5 문자열 표시 반환"></a>9.5 문자열 표시 반환</h2></li>
+<li>toString() 은 오브젝트 타입을 문자열 표시 형태로 변환해 반환한다.<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>().toString());</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">console</span>.log(obj.toString.call(<span class="keyword">new</span> <span class="built_in">Number</span>())); <span class="comment">// [object Number]</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.toString.call(Undefined)); <span class="comment">// [object Undefined]</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.toString.call(<span class="literal">null</span>)); <span class="comment">// [object Null]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="toString-의-특징"><a href="#toString-의-특징" class="headerlink" title="toString() 의 특징"></a>toString() 의 특징</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">123</span>);</span><br><span class="line"><span class="built_in">console</span>.log(obj.toString()); <span class="comment">//123</span></span><br></pre></td></tr></table></figure>
+<p>상속을 받았는데 빌트인 오브젝트의 toString()메소드가 호출되지 않는 것은 각 오브젝트에 toString 메소드가 있기 때문이다.(만일 이렇다면 원시타입을 반환하겠죠?)<br>toString()메소드가 호출되면 각 오브젝트에 속한 toString()메소드를 먼저 찾는다.</p>
+<h2 id="9-6-지역화-문자로-변환"><a href="#9-6-지역화-문자로-변환" class="headerlink" title="9.6 지역화 문자로 변환"></a>9.6 지역화 문자로 변환</h2><ul>
+<li>지역화 문자로 변환한 값 반환<br>ex) IE브라우저로 한국에서 12345 변환 =&gt; 12,345.00<h2 id="9-7-프리미티브-값-반환"><a href="#9-7-프리미티브-값-반환" class="headerlink" title="9.7 프리미티브 값 반환"></a>9.7 프리미티브 값 반환</h2></li>
+<li>object 위치에 인스턴스를 지정하며 인스턴스의 원시 값을 반환한다.</li>
+<li>Boolean, Date, Number, String오브젝트는 [[PrimitiveValue]]값이 반환되도록 하기 위해 오브젝트에 valueOf메소드를 갖고 있다.<h2 id="9-8-프로퍼티-소유-여부"><a href="#9-8-프로퍼티-소유-여부" class="headerlink" title="9.8 프로퍼티 소유 여부"></a>9.8 프로퍼티 소유 여부</h2></li>
+<li>hasOwnProperty 메소드는 프로퍼티 소유여부를 Boolean으로 반환<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>();</span><br><span class="line">ojb.pty = <span class="string">'check'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(obj.hasOwnProperty(<span class="string">'pty'</span>)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="prototype-chain-상속"><a href="#prototype-chain-상속" class="headerlink" title="prototype chain, 상속"></a>prototype chain, 상속</h3><p>prototype에 오브젝트를 연결하는 것과 인스턴스를 연결하는 것은 다르다.<br>오브젝트 연결은 [name: value]형태를 연결한 것이고 인스턴스 연결은 new 연산자로 생성한 인스턴스를 연결한 것이다.<br>인스턴스가 연결된 형태를  prototype chain이라고 한다.</p>
+<h2 id="9-9-prototype에-오브젝트-존재-여부"><a href="#9-9-prototype에-오브젝트-존재-여부" class="headerlink" title="9.9 prototype에 오브젝트 존재 여부"></a>9.9 prototype에 오브젝트 존재 여부</h2><p>isPrototypeOf 메소드는 prototype에 오브젝트가 존재하는지 여부를 Boolean값으로 반환</p>
+<h2 id="9-10-프로퍼티-열거-가능-여부"><a href="#9-10-프로퍼티-열거-가능-여부" class="headerlink" title="9.10 프로퍼티 열거 가능 여부"></a>9.10 프로퍼티 열거 가능 여부</h2><p>propertyEnumerable 메소드는 프로퍼티의 열거 가능 여부를 반환한다.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">obj.value = <span class="string">'값'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.keys(obj)); <span class="comment">// [value]</span></span><br><span class="line"><span class="built_in">console</span>.log(obj.propertyIsEnumerable(<span class="string">'value'</span>)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.prototype.add = <span class="string">'plus'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> addObj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">console</span>.log(addObj.add); <span class="comment">// plus</span></span><br><span class="line"><span class="built_in">console</span>.log(addObj.propertyIsEnumerable(<span class="string">'add'</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/개발/" rel="tag"># 개발</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/02/javascript_08/" rel="next" title="자바스크립트의 언어적 개념 8">
+                <i class="fa fa-chevron-left"></i> 자바스크립트의 언어적 개념 8
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Monica Kwon</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#오브젝트"><span class="nav-number">1.</span> <span class="nav-text">오브젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9-1-프로퍼티-리스트"><span class="nav-number">1.1.</span> <span class="nav-text">9.1 프로퍼티 리스트</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-2-Object-분류"><span class="nav-number">1.2.</span> <span class="nav-text">9.2 Object 분류</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-3-new-Object"><span class="nav-number">1.3.</span> <span class="nav-text">9.3 new Object()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-4-Object"><span class="nav-number">1.4.</span> <span class="nav-text">9.4 Object()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-5-문자열-표시-반환"><span class="nav-number">1.5.</span> <span class="nav-text">9.5 문자열 표시 반환</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#toString-의-특징"><span class="nav-number">1.5.1.</span> <span class="nav-text">toString() 의 특징</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-6-지역화-문자로-변환"><span class="nav-number">1.6.</span> <span class="nav-text">9.6 지역화 문자로 변환</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-7-프리미티브-값-반환"><span class="nav-number">1.7.</span> <span class="nav-text">9.7 프리미티브 값 반환</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-8-프로퍼티-소유-여부"><span class="nav-number">1.8.</span> <span class="nav-text">9.8 프로퍼티 소유 여부</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#prototype-chain-상속"><span class="nav-number">1.8.1.</span> <span class="nav-text">prototype chain, 상속</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-9-prototype에-오브젝트-존재-여부"><span class="nav-number">1.9.</span> <span class="nav-text">9.9 prototype에 오브젝트 존재 여부</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-10-프로퍼티-열거-가능-여부"><span class="nav-number">1.10.</span> <span class="nav-text">9.10 프로퍼티 열거 가능 여부</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Monica Kwon</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
